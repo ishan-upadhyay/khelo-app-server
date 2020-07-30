@@ -5,12 +5,16 @@ const app = express();
 
 app.use(express.static('public'));
 
-app.get("/",function(request, response){
-    response.sendFile(__dirname  + "/login.html");
+
+app.get("/index.html",function(request, response){
+    response.sendFile(__dirname  + "/index.html");
 
 });
-app.get("/index",function(request, response){
-    response.sendFile(__dirname  + "/index.html");
+app.get("/",function(request, response){
+    response.sendFile(__dirname  + "/login.html");
+});
+app.get("/login.html",function(request, response){
+    response.sendFile(__dirname  + "/login.html");
 
 });
 app.listen(3000,function(){
