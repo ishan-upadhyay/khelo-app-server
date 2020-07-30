@@ -9,7 +9,10 @@ app.get("/",function(request, response){
     response.sendFile(__dirname  + "/login.html");
 
 });
+app.get("/index",function(request, response){
+    response.sendFile(__dirname  + "/index.html");
 
+});
 app.listen(3000,function(){
       console.log("Server started at 3000");
 });
