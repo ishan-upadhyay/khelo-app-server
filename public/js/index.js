@@ -13,6 +13,27 @@ var firebaseConfig =
   firebase.initializeApp(firebaseConfig);
   
   firebase.auth.Auth.Persistence.LOCAL;
+  
+
+  var rootRef=firebase.database().ref().child("posts");
+   
+  rootRef.on("value",snap=>{
+    console.log(snap.val());
+    snap.forEach(childSnap=>{
+       
+      var hostid=childSnap.child("hostId").val();
+      var commentCount=childSnap.child("commentCount").val();
+      var description=childSnap.child("description").val();
+      var publishDate=childSnap.child("publishDate").val();
+
+      $("#event_name").append("<p> --> HOST ID :"+hostid+"</p>");
+      $("#event_name").append("<p> PUBLISHED ON: "+publishDate+"</p>");
+      $("#event_name").append("<p> DESCRIPTION :"+description+"</p><hr>");
+      
+    });
+    
+  });
+
 
 
   $("#btn-login").click(function()
@@ -68,3 +89,4 @@ var firebaseConfig =
   {
     firebase.auth().signOut();
   });
+
