@@ -34,6 +34,25 @@ var firebaseConfig =
     
   });
 
+ var rootuserRef=firebase.database().ref().child("users");
+   
+  rootuserRef.on("value",snap=>{
+    console.log(snap.val());
+    snap.forEach(childSnap=>{
+       
+      var displayName=childSnap.child("displayName").val();
+      var email=childSnap.child("email").val();
+      var primarySport=childSnap.child("primarySport").val();
+      var age=childSnap.child("age").val();
+
+      $("#event_user_name").append("<p> NAME :"+displayName+"</p>");
+      $("#event_user_name").append("<p> EMAIL : "+email+"</p>");
+      $("#event_user_name").append("<p> AGE : "+age+"</p>");
+      $("#event_user_name").append("<p> PRIMARY SPORT :"+primarySport+"</p><hr><hr>");
+      
+    });
+    
+  });
 
 
   $("#btn-login").click(function()
