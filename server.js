@@ -25,6 +25,15 @@ app.get("/forgot-password.html",function(request, response){
     response.sendFile(__dirname  + "/forgot-password.html");
 
 });
+app.get("/posts.html",function(request, response){
+    response.sendFile(__dirname  + "/posts.html");
+
+});
+
+app.get("/users.html",function(request, response){
+    response.sendFile(__dirname  + "/users.html");
+
+});
 app.listen(3000,function(){
       console.log("Server started at 3000");
 });
