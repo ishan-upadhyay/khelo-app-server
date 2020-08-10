@@ -18,7 +18,7 @@ var firebaseConfig =
   var rootRef=firebase.database().ref().child("posts");
    
   rootRef.on("value",snap=>{
-    console.log(snap.val());
+   
     snap.forEach(childSnap=>{
        
       var hostid=childSnap.child("hostId").val();
@@ -26,10 +26,12 @@ var firebaseConfig =
       var description=childSnap.child("description").val();
       var publishDate=childSnap.child("publishDate").val();
 
-      $("#event_name").append("<p> --> HOST ID :"+hostid+"</p>");
+      $("#event_name").append("<span> --> HOST ID :"+hostid+
+        "</span><div class='dropdown'><button style='float:right' class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-v'></i></button><div class='dropdown-menu' aria-labelledby='dropdownMenuButton'><a class='dropdown-item' href='#'>Edit post</a><a class='dropdown-item' href='#'>Delete post</a></div></div>");
+      
       $("#event_name").append("<p> PUBLISHED ON: "+publishDate+"</p>");
       $("#event_name").append("<p> DESCRIPTION :"+description+"</p><hr>");
-      
+      // $("#event_name").append("<span><i class='fas fa-edit'>"+"</i></span>");
     });
     
   });
@@ -37,7 +39,7 @@ var firebaseConfig =
  var rootuserRef=firebase.database().ref().child("users");
    
   rootuserRef.on("value",snap=>{
-    console.log(snap.val());
+   
     snap.forEach(childSnap=>{
        
       var displayName=childSnap.child("displayName").val();

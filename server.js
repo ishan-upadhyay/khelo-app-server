@@ -17,10 +17,7 @@ app.get("/login.html",function(request, response){
     response.sendFile(__dirname  + "/login.html");
 
 });
-app.get("/charts.html",function(request, response){
-    response.sendFile(__dirname  + "/charts.html");
 
-});
 app.get("/forgot-password.html",function(request, response){
     response.sendFile(__dirname  + "/forgot-password.html");
 
