@@ -26,7 +26,7 @@ var firebaseConfig =
       var description=childSnap.child("description").val();
       var publishDate=childSnap.child("publishDate").val();
       
-      $("#event_name").append("<span></span><div class='dropdown'><button style='float:right' class='btn  animated--fade-in' type='button' id='dropdownMenuButton ' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-v'></i></button><div class='dropdown-menu' aria-labelledby='dropdownMenuButton'><a  styles='font-size:8px;' class='dropdown-item' href='#'>Edit post</a><button styles='font-size:8px;'class='dropdown-item' href='#' >Delete post</button></div></div>");
+      $("#event_name").append("<span></span><div class='dropdown'><button style='float:right' class='btn  animated--fade-in' type='button' id='dropdownMenuButton ' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-v'></i></button><div class='dropdown-menu' aria-labelledby='dropdownMenuButton'><a  styles='font-size:8px;' class='dropdown-item' href='#'>Edit post</a><button styles='font-size:8px;'class='dropdown-item' href='#' onclick=deleteposts('"+childSnap.key+"')>Delete post</button></div></div>");
       $("#event_name").append("<p> HOST ID: "+hostid+"</p>");
       $("#event_name").append("<p> PUBLISHED ON: "+publishDate+"</p>");
       $("#event_name").append("<p> DESCRIPTION:"+description+"</p><hr><hr>");
