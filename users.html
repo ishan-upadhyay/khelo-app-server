@@ -124,17 +124,22 @@
 
       <!-- Nav Item - Charts -->
       <li class="nav-item active">
-        <a class="nav-link" href="posts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Posts</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
         <a class="nav-link" href="users.html">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-users"></i>
           <span>Users</span></a>
       </li>
+
+      <li class="nav-item ">
+        <a class="nav-link" href="posts.html">
+          <i class="fas fa-clone"></i>
+          <span>Posts</span></a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="deleted_posts.html">
+          <i class="fas fa-trash"></i>
+          <span>Deleted Posts</span></a>
+      </li>
+
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -341,7 +346,7 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Users</h1>
-          <p class="mb-4">The registered users are:</a>.</p>
+          <p class="mb-4">The registered users are:</a></p>
 
           <!-- Content Row -->
           <div class="row">
@@ -353,7 +358,9 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold  text-uppercase mb-1 " id="event_user_name"></div>
+                      <div class="text-xs font-weight-bold   mb-1 " id="event_user_name" style="color:#838383; padding-left: 2rem;">
+                      </div>
+                      
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="event_user_description"></div>
                     </div>
                     <div class="col-auto">
