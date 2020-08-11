@@ -22,6 +22,9 @@ app.get("/forgot-password.html",function(request, response){
     response.sendFile(__dirname  + "/forgot-password.html");
 
 });
+
+
+
 app.get("/posts.html",function(request, response){
     response.sendFile(__dirname  + "/posts.html");
 
@@ -29,6 +32,12 @@ app.get("/posts.html",function(request, response){
 
 app.get("/users.html",function(request, response){
     response.sendFile(__dirname  + "/users.html");
+
+});
+
+
+app.get("/deleted_posts.html",function(request, response){
+    response.sendFile(__dirname  + "/deleted_posts.html");
 
 });
 app.listen(3000,function(){
