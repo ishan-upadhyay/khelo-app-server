@@ -17,7 +17,6 @@ var firebaseConfig =
 
 
   var rootRef=firebase.database().ref().child("posts");
-   
   rootRef.on("value",snap=>{
     console.log(snap.val());
     snap.forEach(childSnap=>{
@@ -27,7 +26,7 @@ var firebaseConfig =
       var description=childSnap.child("description").val();
       var publishDate=childSnap.child("publishDate").val();
       
-      $("#event_name").append("<span></span><div class='dropdown'><button style='float:right' class='btn  animated--fade-in' type='button' id='dropdownMenuButton ' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-v'></i></button><div class='dropdown-menu' aria-labelledby='dropdownMenuButton'><a  styles='font-size:8px;' class='dropdown-item' href='#'>Edit post</a><a styles='font-size:8px;'class='dropdown-item' href='#'>Delete post</a></div></div>");
+      $("#event_name").append("<span></span><div class='dropdown'><button style='float:right' class='btn  animated--fade-in' type='button' id='dropdownMenuButton ' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-v'></i></button><div class='dropdown-menu' aria-labelledby='dropdownMenuButton'><a  styles='font-size:8px;' class='dropdown-item' href='#'>Edit post</a><button styles='font-size:8px;'class='dropdown-item' href='#' >Delete post</button></div></div>");
       $("#event_name").append("<p> HOST ID: "+hostid+"</p>");
       $("#event_name").append("<p> PUBLISHED ON: "+publishDate+"</p>");
       $("#event_name").append("<p> DESCRIPTION:"+description+"</p><hr><hr>");
@@ -37,6 +36,18 @@ var firebaseConfig =
     
   });
 
+   function deleteposts(key)
+    {
+      var deleteRef=firebase.database().ref().child("posts").child(key);
+
+      return deleteRef.remove()
+      .then(function(){
+         console.log("Remove successfully");
+      })
+      .catch(function(){
+         console.log("error occured");
+      });
+    }
 
   var rootuserRef=firebase.database().ref().child("users");
    
@@ -71,7 +82,6 @@ var firebaseConfig =
       var location=childSnap.child("location").val();
       
       $("#event_deleted_posts").append("<span></span><button style='float:right' type='button' class='btn btn-warning'>Restore</button>");      
-
       $("#event_deleted_posts").append("<p> POST ID:"+postid+ "</p>");      
       $("#event_deleted_posts").append("<p> HOSTID: "+hostid+"</p>");
       $("#event_deleted_posts").append("<p> TYPE: "+type+"</p>");
