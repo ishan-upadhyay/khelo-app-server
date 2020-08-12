@@ -42,13 +42,17 @@ var firebaseConfig =
   function deleteposts(key)
   {
     
-    var deleteRef=firebase.database().ref().child("posts").child(key);
-    firebase.database().ref('deletedPosts/').push({
-     
-     
-    });
     
-    return deleteRef.remove()
+    var deleteRef=firebase.database().ref().child("posts").child(key);
+      firebase.database().ref('posts/'+key).on('value',snapshot=>{
+        hostId=snapshot.val().hostId;
+         publishDate=snapshot.val().publishDate;
+         description=snapshot.val().description;
+         data={hostId,description,publishDate};
+        firebase.database().ref('deletedPosts/').push(data);
+     });
+
+   return  deleteRef.remove()
     .then(function(){
        window.alert("Deleted successfully\n Refresh The Page to see the changes");
     })
