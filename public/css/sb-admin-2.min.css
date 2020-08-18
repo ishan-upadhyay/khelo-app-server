@@ -12554,3 +12554,15 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
     width: 100%
 }
+
+#closebutton:hover{
+    color : blue;
+
+}
+#descpInput{
+    height: 200px;
+}
+
+.editForm{
+ font-size:15px ;   
+}
