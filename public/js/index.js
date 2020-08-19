@@ -16,33 +16,62 @@ firebase.auth.Auth.Persistence.LOCAL;
 
 
 
-function openModal() {
-  $('#tryModal').modal('show')
-}
-
+// function openModal() {
+//   $('#tryModal').modal('show');
+//   alert("hi");
+// }
+ // function showinfo(key){
+ //  alert(key);
+  // $('#tryModal').modal('show');
+ // }
 
 
 var rootRef = firebase.database().ref().child("posts");
 
-rootRef.on("value", snap => {
-  console.log(snap.val());
-  snap.forEach(childSnap => {
+rootRef.on("child_added", childSnap => {
+  
 
 
     var hostid = childSnap.child("hostId").val();
     var commentCount = childSnap.child("commentCount").val();
     var description = childSnap.child("description").val();
     var publishDate = childSnap.child("publishDate").val();
-    $("#event_name").append("<span></span><div class='dropdown'><button style='float:right' class='btn  animated--fade-in' type='button' id='dropdownMenuButton ' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-v'></i></button><div class='dropdown-menu' aria-labelledby='dropdownMenuButton'><a  styles='font-size:8px;' class='dropdown-item' onclick='openModal()' href='#'>Edit post</a><button styles='font-size:8px;'class='dropdown-item' href='#' onclick=deleteposts('" + childSnap.key + "')>Delete post</button></div></div>");
+    $("#event_name").append("<span></span><div class='dropdown'><button style='float:right' class='btn  animated--fade-in' type='button' id='dropdownMenuButton ' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-v'></i></button><div class='dropdown-menu' aria-labelledby='dropdownMenuButton'><a  styles='font-size:8px;' class='dropdown-item'  onclick=editposts('" + childSnap.key + "')>Edit post</a><button styles='font-size:8px;'class='dropdown-item' href='#' onclick=deleteposts('" + childSnap.key + "')>Delete post</button></div></div>");
     $("#event_name").append("<p> HOST ID: " + hostid + "</p>");
     $("#event_name").append("<p> PUBLISHED ON: " + publishDate + "</p>");
     $("#event_name").append("<p> DESCRIPTION:" + description + "</p><hr><hr>");
 
 
-  });
+  
 
 
 });
+
+
+function editposts(key){
+  $('#tryModal').modal('show');
+  $(window).on('shown.bs.modal', function() { 
+    $('#tryModal').modal('show');
+    firebase.database().ref('posts/'+key).on('value',function(snapshot){
+      document.getElementById('exampleInputEmail1').value=snapshot.val().hostId;
+      document.getElementById('pd').value=snapshot.val().publishDate;
+      document.getElementById('desc').value=snapshot.val().description;
+    })
+});
+   $("#save-btn").click(function () {
+  var hostid=document.getElementById('exampleInputEmail1').value;
+  var publishdate=document.getElementById('pd').value;
+  var description=document.getElementById('desc').value;
+firebase.database().ref('posts/'+key).update({
+   hostId:hostid,
+   publishDate:publishdate,
+   description:description
+});  
+alert("changes have been done! refresh to see the changes");
+});
+   
+  
+}
 
 
 function deleteposts(key) {
@@ -71,9 +100,8 @@ function deleteposts(key) {
 
 var rootuserRef = firebase.database().ref().child("users");
 
-rootuserRef.on("value", snap => {
-  console.log(snap.val());
-  snap.forEach(childSnap => {
+rootuserRef.on("child_added", childSnap => {
+ 
 
     var displayName = childSnap.child("displayName").val();
     var email = childSnap.child("email").val();
@@ -84,17 +112,14 @@ rootuserRef.on("value", snap => {
     $("#event_user_name").append("<p> EMAIL: " + email + "</p>");
     $("#event_user_name").append("<p> AGE: " + age + "</p>");
     $("#event_user_name").append("<p> PRIMARY SPORT:" + primarySport + "</p><hr><hr>");
-  });
 
 });
 
 
 var rootdeleted_postRef = firebase.database().ref().child("deletedPosts");
 
-rootdeleted_postRef.on("value", snap => {
-  console.log(snap.val());
-  snap.forEach(childSnap => {
-
+rootdeleted_postRef.on("child_added", childSnap => {
+  
     var postid = childSnap.child("postId").val();
     var hostid = childSnap.child("hostId").val();
     var type = childSnap.child("type").val();
@@ -108,7 +133,7 @@ rootdeleted_postRef.on("value", snap => {
     $("#event_deleted_posts").append("<p> TYPE: " + type + "</p>");
     $("#event_deleted_posts").append("<p> DESCRIPTION:" + description + "</p>");
     $("#event_deleted_posts").append("<p> LOCATION:" + location + "</p><hr><hr>");
-  });
+
 
 });
 

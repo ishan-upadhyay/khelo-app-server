@@ -436,7 +436,7 @@
       </div>
     </div>
 
-    <div class="modal" id="tryModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="tryModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -454,22 +454,23 @@
               </div>
               <div class="form-group">
                 <label class="labels" for="exampleInputPassword1">PUBLISHED DATE:</label> 
-                <input type="password" class="form-control" id="" placeholder="">
+                <input type="text" class="form-control" id="pd" placeholder="">
                
               </div>
               <div class="form-group">
                 <label class="labels" for="exampleInputPassword1">DESCRIPTION:</label>
-                <input type="password" class="form-control" id="descpInput" placeholder="">
+                <input type="text" class="form-control" id="desc" placeholder="">
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" id="save-btn" class="btn btn-primary" >Save changes</button>
           
           </div>
         </div>
       </div>
     </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
