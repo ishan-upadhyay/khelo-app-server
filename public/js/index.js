@@ -36,7 +36,7 @@ rootRef.on("child_added", childSnap => {
     var commentCount = childSnap.child("commentCount").val();
     var description = childSnap.child("description").val();
     var publishDate = childSnap.child("publishDate").val();
-    $("#event_name").append("<span></span><div class='dropdown'><button style='float:right' class='btn  animated--fade-in' type='button' id='dropdownMenuButton ' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-v'></i></button><div class='dropdown-menu' aria-labelledby='dropdownMenuButton'><a  styles='font-size:8px;' class='dropdown-item'  onclick=editposts('" + childSnap.key + "')>Edit post</a><button styles='font-size:8px;'class='dropdown-item' href='#' onclick=deleteposts('" + childSnap.key + "')>Delete post</button></div></div>");
+    $("#event_name").append("<span></span><div class='dropdown'><button style='float:right' class='btn  animated--fade-in' type='button' id='dropdownMenuButton ' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-v'></i></button><div class='dropdown-menu' aria-labelledby='dropdownMenuButton'><a  id='edit-dd' styles='font-size:8px;' class='dropdown-item'  onclick=editposts('" + childSnap.key + "')><i class='fas fa-pen editdd'></i>Edit post</a><a id= 'del-dd'styles='font-size:8px;'class='dropdown-item' href='#' onclick=deleteposts('" + childSnap.key + "')><i class='fas fa-trash-alt deldd'></i>Delete post</a></div></div>");
     $("#event_name").append("<p> HOST ID: " + hostid + "</p>");
     $("#event_name").append("<p> PUBLISHED ON: " + publishDate + "</p>");
     $("#event_name").append("<p> DESCRIPTION:" + description + "</p><hr><hr>");
@@ -62,16 +62,21 @@ function editposts(key){
   var hostid=document.getElementById('exampleInputEmail1').value;
   var publishdate=document.getElementById('pd').value;
   var description=document.getElementById('desc').value;
+ 
 firebase.database().ref('posts/'+key).update({
    hostId:hostid,
    publishDate:publishdate,
    description:description
 });  
-alert("changes have been done! refresh to see the changes");
+window.alert("Your Changes have been done! \n Refresh the page to see the changes");
+window.location.reload();
+
 });
    
   
 }
+
+
 
 
 function deleteposts(key) {
@@ -89,6 +94,7 @@ function deleteposts(key) {
   return deleteRef.remove()
     .then(function () {
       window.alert("Deleted successfully\n Refresh The Page to see the changes");
+      window.location.reload();
     })
     .catch(function () {
       console.log("error occured");
@@ -126,7 +132,7 @@ rootdeleted_postRef.on("child_added", childSnap => {
     var description = childSnap.child("description").val();
     var location = childSnap.child("location").val();
 
-    $("#event_deleted_posts").append("<span></span><button style='float:right' type='button' class='btn btn-warning'>Restore</button>");
+   // $("#event_deleted_posts").append("<span></span><button style='float:right' type='button' class='btn btn-warning'>Restore</button>");
 
     $("#event_deleted_posts").append("<p> POST ID:" + postid + "</p>");
     $("#event_deleted_posts").append("<p> HOSTID: " + hostid + "</p>");
