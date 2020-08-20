@@ -1,5 +1,4 @@
-var firebaseConfig =
-{
+var firebaseConfig = {
   apiKey: "AIzaSyAxpJ486Tx3BYWDTsyCNLy5C-h62-a5OPg",
   authDomain: "khelod-admin.firebaseapp.com",
   databaseURL: "https://khelod-admin.firebaseio.com",
@@ -20,60 +19,60 @@ firebase.auth.Auth.Persistence.LOCAL;
 //   $('#tryModal').modal('show');
 //   alert("hi");
 // }
- // function showinfo(key){
- //  alert(key);
-  // $('#tryModal').modal('show');
- // }
+// function showinfo(key){
+//  alert(key);
+// $('#tryModal').modal('show');
+// }
 
 
 var rootRef = firebase.database().ref().child("posts");
 
 rootRef.on("child_added", childSnap => {
-  
 
 
-    var hostid = childSnap.child("hostId").val();
-    var commentCount = childSnap.child("commentCount").val();
-    var description = childSnap.child("description").val();
-    var publishDate = childSnap.child("publishDate").val();
-    $("#event_name").append("<span></span><div class='dropdown'><button style='float:right' class='btn  animated--fade-in' type='button' id='dropdownMenuButton ' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-v'></i></button><div class='dropdown-menu' aria-labelledby='dropdownMenuButton'><a  id='edit-dd' styles='font-size:8px;' class='dropdown-item'  onclick=editposts('" + childSnap.key + "')><i class='fas fa-pen editdd'></i>Edit post</a><a id= 'del-dd'styles='font-size:8px;'class='dropdown-item' href='#' onclick=deleteposts('" + childSnap.key + "')><i class='fas fa-trash-alt deldd'></i>Delete post</a></div></div>");
-    $("#event_name").append("<p> HOST ID: " + hostid + "</p>");
-    $("#event_name").append("<p> PUBLISHED ON: " + publishDate + "</p>");
-    $("#event_name").append("<p> DESCRIPTION:" + description + "</p><hr><hr>");
+
+  var hostid = childSnap.child("hostId").val();
+  var commentCount = childSnap.child("commentCount").val();
+  var description = childSnap.child("description").val();
+  var publishDate = childSnap.child("publishDate").val();
+  $("#event_name").append("<span></span><div class='dropdown'><button style='float:right' class='btn  animated--fade-in' type='button' id='dropdownMenuButton ' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-v'></i></button><div class='dropdown-menu' aria-labelledby='dropdownMenuButton'><a  id='edit-dd' styles='font-size:8px;' class='dropdown-item'  onclick=editposts('" + childSnap.key + "')><i class='fas fa-pen editdd'></i>Edit post</a><a id= 'del-dd'styles='font-size:8px;'class='dropdown-item' href='#' onclick=deleteposts('" + childSnap.key + "')><i class='fas fa-trash-alt deldd'></i>Delete post</a></div></div>");
+  $("#event_name").append("<p> HOST ID: " + hostid + "</p>");
+  $("#event_name").append("<p> PUBLISHED ON: " + publishDate + "</p>");
+  $("#event_name").append("<p> DESCRIPTION:" + description + "</p><hr><hr>");
 
 
-  
+
 
 
 });
 
 
-function editposts(key){
+function editposts(key) {
   $('#tryModal').modal('show');
-  $(window).on('shown.bs.modal', function() { 
+  $(window).on('shown.bs.modal', function () {
     $('#tryModal').modal('show');
-    firebase.database().ref('posts/'+key).on('value',function(snapshot){
-      document.getElementById('exampleInputEmail1').value=snapshot.val().hostId;
-      document.getElementById('pd').value=snapshot.val().publishDate;
-      document.getElementById('desc').value=snapshot.val().description;
+    firebase.database().ref('posts/' + key).on('value', function (snapshot) {
+      document.getElementById('exampleInputEmail1').value = snapshot.val().hostId;
+      document.getElementById('pd').value = snapshot.val().publishDate;
+      document.getElementById('desc').value = snapshot.val().description;
     })
-});
-   $("#save-btn").click(function () {
-  var hostid=document.getElementById('exampleInputEmail1').value;
-  var publishdate=document.getElementById('pd').value;
-  var description=document.getElementById('desc').value;
- 
-firebase.database().ref('posts/'+key).update({
-   hostId:hostid,
-   publishDate:publishdate,
-   description:description
-});  
-window.alert("Your Changes have been done! \n Refresh the page to see the changes");
-window.location.reload();
+  });
+  $("#save-btn").click(function () {
+    var hostid = document.getElementById('exampleInputEmail1').value;
+    var publishdate = document.getElementById('pd').value;
+    var description = document.getElementById('desc').value;
 
-});
-   
-  
+    firebase.database().ref('posts/' + key).update({
+      hostId: hostid,
+      publishDate: publishdate,
+      description: description
+    });
+    window.alert("Your Changes have been done! \n Refresh the page to see the changes");
+    window.location.reload();
+
+  });
+
+
 }
 
 
@@ -87,7 +86,11 @@ function deleteposts(key) {
     hostId = snapshot.val().hostId;
     publishDate = snapshot.val().publishDate;
     description = snapshot.val().description;
-    data = { hostId, description, publishDate };
+    data = {
+      hostId,
+      description,
+      publishDate
+    };
     firebase.database().ref('deletedPosts/').push(data);
   });
 
@@ -102,47 +105,85 @@ function deleteposts(key) {
 
 }
 
-
-
 var rootuserRef = firebase.database().ref().child("users");
 
 rootuserRef.on("child_added", childSnap => {
- 
 
-    var displayName = childSnap.child("displayName").val();
-    var email = childSnap.child("email").val();
-    var primarySport = childSnap.child("primarySport").val();
-    var age = childSnap.child("age").val();
 
-    $("#event_user_name").append("<p> NAME:" + displayName + "</p>");
-    $("#event_user_name").append("<p> EMAIL: " + email + "</p>");
-    $("#event_user_name").append("<p> AGE: " + age + "</p>");
-    $("#event_user_name").append("<p> PRIMARY SPORT:" + primarySport + "</p><hr><hr>");
+  var displayName = childSnap.child("displayName").val();
+  var email = childSnap.child("email").val();
+  var primarySport = childSnap.child("primarySport").val();
+  var age = childSnap.child("age").val();
+
+  $("#event_user_name").append("<span></span><button style='float:right' type='button' class='btn btn-warning'  onclick=Blockeduser('" + childSnap.key + "')>Block</button>");
+
+  $("#event_user_name").append("<p> NAME:" + displayName + "</p>");
+  $("#event_user_name").append("<p> EMAIL: " + email + "</p>");
+  $("#event_user_name").append("<p> PRIMARY SPORT:" + primarySport + "</p>");
+  $("#event_user_name").append("<p> AGE: " + age + "</p><hr><hr>");
+
 
 });
 
+function Blockeduser(key) {
+  var BlockRef = firebase.database().ref().child("users").child(key);
 
+  firebase.database().ref('users/' + key).on('value', snapshot => {
+    displayName = snapshot.val().displayName;
+    email = snapshot.val().email;
+    primarySport = snapshot.val().primarySport;
+    age = snapshot.val().age
+    data = {
+      displayName,
+      email,
+      primarySport,
+      age
+    };
+    firebase.database().ref('Blockedusers/').push(data);
+  });
+
+  return BlockRef.remove()
+    .then(function () {
+      window.alert("Blocked successfully\n Refresh The Page to see the changes");
+      window.location.reload();
+    })
+    .catch(function () {
+      console.log("error occured");
+    });
+}
 var rootdeleted_postRef = firebase.database().ref().child("deletedPosts");
 
 rootdeleted_postRef.on("child_added", childSnap => {
-  
-    var postid = childSnap.child("postId").val();
-    var hostid = childSnap.child("hostId").val();
-    var type = childSnap.child("type").val();
-    var description = childSnap.child("description").val();
-    var location = childSnap.child("location").val();
 
-   // $("#event_deleted_posts").append("<span></span><button style='float:right' type='button' class='btn btn-warning'>Restore</button>");
+  var postid = childSnap.child("postId").val();
+  var hostid = childSnap.child("hostId").val();
+  var type = childSnap.child("type").val();
+  var description = childSnap.child("description").val();
+  var location = childSnap.child("location").val();
 
-    $("#event_deleted_posts").append("<p> POST ID:" + postid + "</p>");
-    $("#event_deleted_posts").append("<p> HOSTID: " + hostid + "</p>");
-    $("#event_deleted_posts").append("<p> TYPE: " + type + "</p>");
-    $("#event_deleted_posts").append("<p> DESCRIPTION:" + description + "</p>");
-    $("#event_deleted_posts").append("<p> LOCATION:" + location + "</p><hr><hr>");
+  // $("#event_deleted_posts").append("<span></span><button style='float:right' type='button' class='btn btn-warning'>Restore</button>");
 
-
+  $("#event_deleted_posts").append("<p> POST ID:" + postid + "</p>");
+  $("#event_deleted_posts").append("<p> HOSTID: " + hostid + "</p>");
+  $("#event_deleted_posts").append("<p> TYPE: " + type + "</p>");
+  $("#event_deleted_posts").append("<p> DESCRIPTION:" + description + "</p>");
+  $("#event_deleted_posts").append("<p> LOCATION:" + location + "</p><hr><hr>");
 });
+var rootBlocked_userRef = firebase.database().ref().child("Blockedusers");
 
+rootBlocked_userRef.on("child_added", childSnap => {
+
+  var displayName = childSnap.child("displayName").val();
+  var email = childSnap.child("email").val();
+  var primarySport = childSnap.child("primarySport").val();
+  var age = childSnap.child("age").val();
+
+
+  $("#event_Blocked_user").append("<p> NAME:" + displayName + "</p>");
+  $("#event_Blocked_user").append("<p> EMAIL: " + email + "</p>");
+  $("#event_Blocked_user").append("<p> AGE: " + age + "</p>");
+  $("#event_Blocked_user").append("<p> PRIMARY SPORT:" + primarySport + "</p><hr><hr>");
+});
 $("#btn-login").click(function () {
   var email = $("#exampleInputEmail").val();
   var password = $("#exampleInputPassword").val();
@@ -156,13 +197,10 @@ $("#btn-login").click(function () {
       console.log(errorMessage);
       window.alert("Message: " + errorMessage);
     });
-  }
-  else {
+  } else {
     window.alert("Please fill out all fields.");
   }
 });
-
-
 $("#btn-resetPassword").click(function () {
   var auth = firebase.auth();
   var email = $("#exampleInputEmail").val();
@@ -177,15 +215,10 @@ $("#btn-resetPassword").click(function () {
       window.alert("Message: " + errorMessage);
 
     });
-  }
-  else {
+  } else {
     window.alert("Please write your Email.");
   }
-
 });
-
-
-
 $("#btn-logout").click(function () {
   firebase.auth().signOut();
 });
