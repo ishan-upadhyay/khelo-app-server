@@ -659,8 +659,8 @@ pre code {
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin-right: -.75rem;
-    margin-left: -.75rem
+    margin:auto;
+    justify-content: center;
 }
 
 .no-gutters {
@@ -697,7 +697,6 @@ pre code {
 .col-lg-3,
 .col-lg-4,
 .col-lg-5,
-.col-lg-6,
 .col-lg-7,
 .col-lg-8,
 .col-lg-9,
@@ -5019,7 +5018,9 @@ input[type=submit].btn-block {
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
-    padding: 1.25rem
+    padding: 1.25rem,
+    
+
 }
 
 .card-title {
@@ -8689,6 +8690,7 @@ button.bg-dark:hover {
 
 .p-5 {
     padding: 3rem !important
+
 }
 
 .pt-5,
@@ -12559,10 +12561,24 @@ body.sidebar-toggled footer.sticky-footer {
     color : blue;
 
 }
-#descpInput{
-    height: 200px;
+#desc{
+    height: auto;
+    
 }
 
 .editForm{
  font-size:15px ;   
+}
+.editdd{
+    padding-right: 6px;
+}
+
+.deldd{
+    padding-right: 6px;
+}
+#edit-dd:hover{
+color: #1cc88a;
+}
+#del-dd:hover{
+    color: red;
 }
