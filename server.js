@@ -40,6 +40,12 @@ app.get("/deleted_posts.html",function(request, response){
     response.sendFile(__dirname  + "/deleted_posts.html");
 
 });
+
+app.get("/Blocked_users.html",function(request, response){
+    response.sendFile(__dirname  + "/Blocked_users.html");
+
+});
+
 app.listen(3000,function(){
       console.log("Server started at 3000");
 });
